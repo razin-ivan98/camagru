@@ -1,3 +1,5 @@
+clear
+
 git clone https://github.com/razin-ivan98/camagru.git
 
 docker-machine start
