@@ -6,7 +6,7 @@ class model
 	
 	function __construct()
 	{
-		$host = '172.17.0.2';
+		$host = '172.17.0.3';
 	   // $host = 'localhost';
 		//$db   = 'id10411394_base';
         $db   = 'base';
