@@ -8,20 +8,25 @@ class controller_settings extends controller
 		$this->view = new view();
 	}
 	
-function action_index()
-{
-	if ($this->model->is_logged() == true)
+	function action_index()
 	{
-		$data = array();		
-		$data['my_name'] = $this->model->get_logged_user();
-		$data['count_of_dialogs_events'] = $this->model->get_count_of_dialogs_events();
-		$this->view->generate('view_settings.php', 'view_template.php', $data);
+		if ($this->model->is_logged() == true)
+		{
+			if ($this->model->is_confirmed() == false)
+			{
+				header("Location: /confirm");
+				return ;
+			}
+			$data = array();		
+			$data['my_name'] = $this->model->get_logged_user();
+			$data['count_of_dialogs_events'] = $this->model->get_count_of_dialogs_events();
+			$this->view->generate('view_settings.php', 'view_template.php', $data);
+		}
+		else
+		{
+			header("Location: /login");
+		}
 	}
-	else
-	{
-		header("Location: /login");
-	}
-}
 
 
 	function action_new_avatar()

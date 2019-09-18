@@ -5,6 +5,8 @@ class Route
 	static function start()
 	{
 		// контроллер и действие по умолчанию
+		if (!isset($_SESSION))
+			session_start();
 		$controller_name = 'feeds';
 		$action_name = 'index';
 		
@@ -14,6 +16,14 @@ class Route
 		if ( !empty($routes[1]) )
 		{	
 			$controller_name = $routes[1];
+		}
+		if ($controller_name === "link")
+		{
+			include ("application/controllers/controller_link.php");
+			include ("application/models/model_link.php");
+			$controller = new controller_link();
+			$controller->link($routes[2]);
+			return ;
 		}
 		
 		// получаем имя экшена

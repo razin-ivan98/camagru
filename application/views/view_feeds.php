@@ -7,7 +7,6 @@
 		<a href="/dialogs"><div class="bar_element">Dialogs<?php if ($count_of_dialogs_events != 0) echo "<div class='unread'>".$count_of_dialogs_events."</div>"; ?></div></a>
 		<a href="/settings"><div class="bar_element">Settings</div></a>
 		<a href="/feeds/logout"><div class="bar_element">Logout</div></a>
-		<button onclick="send_mail();" type="button">Send Mail</button>
 	</div>
 	<div class="publishes_block">
 	<!--	<video id="video" width="640" height="480" autoplay></video>-->

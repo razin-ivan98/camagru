@@ -12,6 +12,12 @@ class controller_feeds extends controller
 	{
 		if ($this->model->is_logged() == true)
 		{
+			if ($this->model->is_confirmed() == false)
+			{
+				header("Location: /confirm");
+				return ;
+			}
+
 			$data = array();		
 			$data['my_name'] = $this->model->get_logged_user();
 			$data['publishes'] = $this->model->get_publishes();

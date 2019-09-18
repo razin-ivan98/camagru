@@ -59,6 +59,24 @@ class model
 			return false;	
 		} 
 	}
+
+	public function is_confirmed()
+	{
+		if (!isset($_SESSION))
+			session_start();
+		if (isset($_SESSION['uid'])) 	
+		{
+			$rez = $this->perfom_query("SELECT * FROM users WHERE id=? AND confirmed=1", array($_SESSION['uid']));
+			$fetch = $rez->fetchall();
+			if (count($fetch) == 0)
+				return (false);
+			return true;
+		} 	
+		else
+		{ 
+			return false;	
+		} 
+	}
 	
 	public function get_logged_user()
 	{
