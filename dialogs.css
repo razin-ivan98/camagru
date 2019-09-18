@@ -1,0 +1,57 @@
+.dialog
+{
+	margin-top: 5px;
+	border: 2px solid #ffc6c6;
+    border-radius: 10px;
+	height: 40px;
+	padding: 5px;
+	text-align: center;
+	font-family: Linden Hill;
+	text-align: center;
+	color: #ff6c6c;
+	font-size: 24px;
+}
+
+
+
+#dialogs_field
+{
+	
+	height: 70vh;
+	overflow-y: scroll;
+}
+
+.opp_message
+{
+	margin-top: 5px;
+	padding: 5px;
+	width: 70%;
+	border: 2px solid #ffc6c6;
+	border-radius: 10px;
+}
+
+.my_message
+{
+	margin-top: 5px;
+	padding: 5px;
+	width: 70%;
+	margin-left: 25%;
+	text-align: right;
+	border: 2px solid #ffc6c6;
+	border-radius: 10px;
+}
+
+.my_message p
+{
+	margin: 0;
+	font-family: Linden Hill;
+	color: #ff6c6c;
+	font-size: 18px;
+}
+.opp_message p
+{
+	font-family: Linden Hill;
+	margin: 0;
+	color: #ff6c6c;
+	font-size: 18px;
+}

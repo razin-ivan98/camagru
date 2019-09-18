@@ -1,0 +1,207 @@
+.unread
+{
+	width: 20px;
+	height: 20px;
+	border: 2px solid #ff6c6c;
+	border-radius: 50%;
+	font-size: 18px;
+float: right;
+}
+
+.my_message .unread
+{
+		float: left;
+}
+	
+.container
+{
+	width: 1000px;
+	margin: auto;
+}
+
+.sidebar_left
+{
+	width: 200px;
+	position: sticky;
+	top: 70px;
+	float: left;
+}
+.sidebar_right
+{
+	position: sticky;
+	top: 70px;
+	margin-left: 5px;
+	width: 200px;
+	float: left;
+}
+.publishes_block
+{
+	margin-left: 5px;
+	width: 600px;
+	height: 100%;
+	float: left;
+}
+
+.header
+{
+	height: 60px;
+	position: fixed;
+	background-color: #ff9e9e;
+    width: 100%;
+    top: 0;
+	z-index: 100;
+	
+}
+
+.logo
+{
+	float: left;
+	z-index: 110;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.chapter
+{
+	background-color: pink;
+	float: left;
+	height: 60px;
+	font-size: 30px;
+	background-color: #ff97bb;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.logo-image
+{
+	height: 60px;
+}
+
+.login
+{
+	height: 50px;
+	background-color: #ff97bb;
+	float: right;
+	padding: 5px;
+	font-size: 30px;
+}
+.login ul
+{
+	font-size: 20px;
+	display: none;
+}
+
+.login:hover
+{
+	height: 150px;
+}
+.login:hover ul
+{
+	display: block;
+	
+}
+
+.marg
+{
+	margin-top: 80px;
+}
+
+.message_block
+{	
+	background-color: pink;
+	margin: 0 auto;
+	margin-top: 10px;
+	width: 600px;
+	min-height: 90vh;
+	
+	padding: 5px;
+	padding-bottom: 50px;
+}
+
+
+#video
+{
+	background-color: green;
+}
+
+
+
+
+.comment_constructor
+{
+	margin-top: 5px;
+	padding: 5px;
+}
+.message_conctructor
+{
+
+	background-color: #ff00ee;
+	padding: 5px;
+	width: 590px;
+	position: fixed;
+	bottom: 5px;
+}
+.dialog_header
+{
+	background-color: #ff97bb;
+	height: 40px;
+	padding: 5px;
+}
+
+
+.avatar
+{
+	float: left;
+	height: 40px;
+	float: left;
+}
+.avatar img
+{
+	height: 40px;
+	border-radius: 20px;
+}
+
+
+
+
+
+
+.author
+{
+	height: 40px;
+	width: 350px;
+	float: left;
+	margin: 0 auto;
+	padding: 0;
+	text-align: center;
+}
+
+h3
+{
+	margin: 10px;
+}
+
+
+
+.form
+{
+	background-color: pink;
+	margin: 0 auto;
+	margin-top: 10px;
+	width: 600px;
+	padding: 5px;
+	position: relative;
+	text-align: center;
+}
