@@ -3,7 +3,7 @@ clear
 git clone https://github.com/razin-ivan98/camagru.git
 
 docker-machine start
-env $(docker-machine env)
+eval $(docker-machine env)
 
 docker rm camagru_php
 docker rm camagru_phpmyadmin
