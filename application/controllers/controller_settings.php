@@ -39,5 +39,26 @@ class controller_settings extends controller
 		else
 			$this->view->response_ajax(array('answer' => false));
 	}
+
+	function action_change_password()
+	{
+		if ($_POST['new_pass'] === '' ||  $_POST['r_new_pass'] === '' || $_POST['old_pass'] === '')
+		{
+			$this->view->response_ajax(array('answer' => false, 'text' => 'Empty fields'));
+			exit();
+		}
+		if ($_POST['new_pass'] !== $_POST['r_new_pass'])
+		{
+			$this->view->response_ajax(array('answer' => false, 'text' => 'Passwords are different'));
+			exit();
+		}
+		if ($this->model->check_password($_POST['old_pass']) === false)
+		{
+			$this->view->response_ajax(array('answer' => false, 'text' => 'Wrong password'));
+			exit();
+		}
+		$this->model->change_password($_POST['new_pass']);
+		$this->view->response_ajax(array('answer' => true));
+	}
 }
 ?>

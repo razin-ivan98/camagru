@@ -13,12 +13,21 @@
 			print'<div class="publish_header">';
 			print	'<div class="author"><h3>Settings</h3></div>';
 			print'</div>';
-			print'<div class="publish_footer">';
-			print	'<form method="POST" id="settings" enctype="multipart/form-data">';
+		//	print'<div class="publish_footer">';
+			print	'<div class="publish_body"><form method="POST" id="change_avatar" enctype="multipart/form-data">';
 			print		'Change avatar<input type="file" name="file_av">';
 			print		'<button onclick="new_avatar();" type="button">Send</button>';
-			print	'</form>';
-			print'</div>';
+			print	'</form></div>';
+			print 		'<div class="publish_body"><form id="change_password">Change password<br/>';
+			print		'Old password <input type="password" name="old_pass"><br/>';
+			print		'New password <input type="password" name="new_pass"><br/>';
+			print		'Repeat new password <input type="password" name="r_new_pass"><br/>';
+			print		'<button onclick="change_password();" type="button">Send</button></form></div>';
+
+		//	print		'Change avatar<input type="file" name="file_av">';
+		//	print		'<button onclick="new_avatar();" type="button">Send</button>';
+
+		//	print'</div>';
 			print'</div>';
 
 		?>	

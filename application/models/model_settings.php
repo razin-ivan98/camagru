@@ -24,5 +24,10 @@ class model_settings extends model
 		
 		$this->perfom_query("UPDATE avatars SET image_name=? WHERE user_id=?", array($name, $_SESSION['uid']));
 	}
+
+	function change_password($new_pass)
+	{
+		$this->perfom_query("UPDATE users SET password=? WHERE id=?", array(md5($new_pass), $_SESSION['uid']));
+	}
 }
 ?>

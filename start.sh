@@ -2,12 +2,18 @@ clear
 
 git clone https://github.com/razin-ivan98/camagru.git
 
-docker-machine start
-eval $(docker-machine env)
+docker-machine stop
+docker-machine rm default
 
-docker rm camagru_php
-docker rm camagru_phpmyadmin
-docker rm camagru_mysql
+rm -rf ~/goinfre/.docker
+rm -rf ~/.docker
+
+mkdir ~/goinfre/.docker
+ln -s ~/goinfre/.docker ~/.docker
+
+docker-machine create -d virtualbox default
+
+eval $(docker-machine env)
 
 docker run --name camagru_php -d -v $(pwd)/camagru:/app -p 8080:80 webdevops/php-apache-dev
 docker run --name camagru_mysql -d -v camagru_db:/var/lib/mysql --restart on-failure:5 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=base mysql:5 --default-authentication-plugin=mysql_native_password

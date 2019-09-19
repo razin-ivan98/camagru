@@ -14,6 +14,7 @@ class model
 		$user = 'root';
 		//$pass = '1998VONdarm';
 		$pass = 'root';
+		//$pass ='';
 		$charset = 'utf8';
 		//session_start();
 		//if (isset($_SESSION))
@@ -58,6 +59,17 @@ class model
 		{ 
 			return false;	
 		} 
+	}
+
+	function check_password($pass)
+	{
+		$pass = md5($pass);
+		$stmt = $this->perfom_query("SELECT * FROM users WHERE password=? AND id=?", array($pass, $_SESSION['uid']));
+		if (count($stmt->fetchall()) === 0)
+		{
+			return false;
+		}	
+		return true;
 	}
 
 	public function is_confirmed()
