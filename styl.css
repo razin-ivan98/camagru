@@ -5,7 +5,15 @@
 	border: 2px solid #ff6c6c;
 	border-radius: 50%;
 	font-size: 18px;
-float: right;
+	float: right;
+}
+
+.head
+{
+	width: 1000px;
+	height: 60px;
+	margin: auto;
+	border-bottom: 2px solid #ffe6e6;
 }
 
 .my_message .unread
@@ -26,14 +34,7 @@ float: right;
 	top: 70px;
 	float: left;
 }
-.sidebar_right
-{
-	position: sticky;
-	top: 70px;
-	margin-left: 5px;
-	width: 200px;
-	float: left;
-}
+
 .publishes_block
 {
 	margin-left: 5px;
@@ -57,22 +58,7 @@ float: right;
 {
 	float: left;
 	z-index: 110;
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .chapter
 {
@@ -204,4 +190,9 @@ h3
 	padding: 5px;
 	position: relative;
 	text-align: center;
+}
+
+.mobile-menu
+{
+	display: none;
 }

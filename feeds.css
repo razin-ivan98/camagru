@@ -22,21 +22,13 @@ a
 {
 	margin-top: 10px;
 	float: right;
-	width: 200px;
+	min-width: 200px;
 	height: 40px;
 	border-top: 2px solid #ffe6e6;
 	border-bottom: 2px solid #ffe6e6;
 	text-align: center;
 	font-family: Linden Hill;
 	color: #ffe6e6;
-}
-
-.head
-{
-	width: 1000px;
-	height: 60px;
-	margin: auto;
-	border-bottom: 2px solid #ffe6e6;
 }
 
 .publish
@@ -130,4 +122,55 @@ a
 #first_element
 {
 	border-top: none;
+}
+
+@media screen and (orientation: portrait){
+	html, body
+	{
+		width: 100vw;
+	}
+	.logo
+	{
+		float: center;
+		margin: 0 auto;
+	}
+	.mobile-menu
+	{
+		display: block;
+		float: left;
+		height: 60px;
+	}
+	.mibile-menu-image
+	{
+		height: 60px;
+	}
+	.logo
+	{
+		display: none;
+	}
+	.sidebar_left 
+	{
+		display:none;
+	}
+
+	.publishes_block
+	{
+		margin-left: 0;
+		
+	}
+	.container
+	{
+		width: 600px;
+		margin: auto;
+	}
+	.header
+	{
+		width: 600px;
+	}
+	.head
+	{
+		width: 600px;
+	}
+
+
 }
