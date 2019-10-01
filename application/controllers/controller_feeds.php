@@ -99,6 +99,18 @@ class controller_feeds extends controller
 		$answer = array('is_liked' => $is_liked, 'count' => $count);
 		$this->view->response_ajax($answer);
 	}
+	function action_check_dialogs_activity()
+	{
+		$ret = $this->model->get_count_of_dialogs_events();
+		if ($ret > 0)
+		{
+			$this->view->response_ajax(array('answer' => true, 'text' => $ret));
+		}
+		else
+		{
+			$this->view->response_ajax(array('answer' => false, 'text' => $ret));
+		}
+	}
 }
 
 ?>

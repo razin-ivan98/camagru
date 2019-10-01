@@ -55,3 +55,61 @@
 	color: #ff6c6c;
 	font-size: 18px;
 }
+
+@media screen and (orientation: portrait){
+
+	body
+	{
+		font-size: 22px;
+	}
+	.logo
+	{
+		float: center;
+		margin: 0 auto;
+	}
+	.mobile-menu
+	{
+		display: block;
+		float: left;
+		height: 60px;
+	}
+	.mibile-menu-image
+	{
+		height: 60px;
+	}
+	.logo
+	{
+		display: none;
+	}
+	.sidebar_left 
+	{
+		width: 100%;
+		height: 300px;
+		background-color: #ff9e9e;
+		position: fixed;
+		font-size: 36px;
+		top: 62px;
+		left: 0;
+		z-index: 200;
+		display: none;
+	}
+	.sidebar_left a
+	{
+		font-size: 30px;
+	}
+
+	.publishes_block
+	{
+		margin-left: 0;	
+	}
+	.container
+	{
+		width: 600px;
+	}
+
+	.head
+	{
+		width: 600px;
+	}
+
+}

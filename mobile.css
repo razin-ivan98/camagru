@@ -1,0 +1,64 @@
+body
+{
+    font-size: 22px;
+}
+.logo
+{
+    float: center;
+    margin: 0 auto;
+}
+.mobile-menu
+{
+    display: block;
+    float: left;
+    height: 60px;
+}
+.mibile-menu-image
+{
+    height: 60px;
+}
+.logo
+{
+    display: none;
+}
+.sidebar_left 
+{
+    width: 100%;
+    height: 160px;
+    background-color: #ff9e9e;
+    position: fixed;
+    font-size: 36px;
+    top: 62px;
+    left: 0;
+    z-index: 200;
+    display: none;
+}
+.sidebar_left a
+{
+    font-size: 30px;
+}
+
+.publishes_block
+{
+    margin-left: 0;	
+}
+.container
+{
+    width: 600px;
+}
+
+.head
+{
+    width: 600px;
+}
+.alert
+{
+    position:fixed;
+    top: 0;
+    left: 0;
+    z-index: 250;
+    color: #ffdada;
+    text-align: center;
+
+    float:left;
+}

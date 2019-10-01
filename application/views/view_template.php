@@ -2,16 +2,23 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=600px">
 		<title>PicChat</title>
-		<link rel="stylesheet" href="styl.css">
+	
+		
+		<link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="feeds.css">
+
+		<script src="index.js"></script>
 	</head>
 	<body>
 		<div class="header">
 			<div class="head">
-				<div class="mobile-menu">
+				<div class="mobile-menu" onclick="menu();">
 					<img class="mibile-menu-image", src="menu.png">
+					<div class="alert"></div>
 				</div>
+				
 				<div class="logo"> 
 					<a href="/feeds">
 						<img class="logo-image", src="logolong.png">
@@ -23,11 +30,7 @@
 			</div>
 		</div>
 		<div class="marg"></div>
-			
 			<?php include 'application/views/'.$content_view;?>
-			
-		<div class="footer">
-			
-		</div>
+<!-- footer -->
 	</body>
 </html>
