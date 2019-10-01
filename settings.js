@@ -54,6 +54,10 @@ function new_avatar() {
       else alert("Error");
       is_in_request = 0;
     }
+    else if (request.readyState == 4 && request.status == 204)
+		{
+			document.location.href = '/db_error';
+		}
   };
 }
 
@@ -84,6 +88,10 @@ function set_int_check() {
             alert.innerHTML = "";
         }
         is_in_request = 0;
+      }
+      else if (request.readyState == 4 && request.status == 204)
+      {
+        document.location.href = '/db_error';
       }
     }
   }
@@ -117,5 +125,9 @@ function change_password() {
       else alert(answer.text);
       is_in_request = 0;
     }
+    else if (request.readyState == 4 && request.status == 204)
+		{
+			document.location.href = '/db_error';
+		}
   };
 }

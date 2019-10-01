@@ -56,9 +56,8 @@ class View
 						
 				echo('	<div class="comment_constructor">
 							<form method="POST" class="new_comment">
-							<input type="text" name="text">
-							<input type="hidden" name="new_comment" value="true">
-							<button  type="button" onclick="f_new_comment(this);">отправить</button>
+							<input type="text" autocomplete="off" name="text" class="mess_input">
+							<button  type="button" class="mess_submit" onclick="f_new_comment(this);">отправить</button>
 							</form>
 						</div>
 				</div>

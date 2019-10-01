@@ -16,13 +16,17 @@ function log_in()
 
     // Функция для наблюдения изменения состояния request.readyState обновления statusMessage соответственно
 	request.onreadystatechange = function(){ 
-	if (request.readyState == 4 && request.status == 200){
+		if (request.readyState == 4 && request.status == 200){
 		//alert(request.responseText);
 			var res = JSON.parse(request.responseText);
 			if (res.answer == true)
 				document.location.href = "/feeds";
 			else
 				alert(res.text);
-		} 
+		}
+		else if (request.readyState == 4 && request.status == 204)
+		{
+			document.location.href = '/db_error';
+		}
 	} 
 }

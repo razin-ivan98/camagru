@@ -58,6 +58,7 @@ class controller_feeds extends controller
 		{
 			$this->view->draw_publish($new);
 		}
+/////////////////////////////////////////
 	}
 	
 	public function action_delete_publish()

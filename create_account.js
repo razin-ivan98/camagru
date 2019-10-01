@@ -17,7 +17,7 @@ function create_account()
 	
     // Функция для наблюдения изменения состояния request.readyState обновления statusMessage соответственно
 	request.onreadystatechange = function(){ 
-	if (request.readyState == 4 && request.status == 200){
+		if (request.readyState == 4 && request.status == 200){
 			var res = JSON.parse(request.responseText);
 			if (res.answer == true)
 			{
@@ -26,6 +26,10 @@ function create_account()
 			}
 			else
 				alert(res.text);
-		} 
-	} 
+		}
+		else if (request.readyState == 4 && request.status == 204)
+		{
+			document.location.href = '/db_error';
+		}
+	}
 }

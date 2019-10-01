@@ -25,14 +25,36 @@ class controller_confirm extends controller
 			session_start();
 		if (isset($_POST['email']) AND $_POST['email'] != '')
 		{
-			$this->model->set_email($_POST['email']);
-
+			try
+			{
+				$this->model->set_email($_POST['email']);
+			}
+			catch (PDOException $ex)
+			{
+				header('Location: /db_error');
+				exit;
+			}
 			$link = $this->generate_random(40);
 			$link .= $_SESSION['uid'];
-			$this->model->save_link($link, "confirm");
-
+			try
+			{
+				$this->model->save_link($link, "confirm");
+			}
+			catch (PDOException $ex)
+			{
+				header('Location: /db_error');
+				exit;
+			}
 			$email = $_POST['email'];
-			$user = $this->model->get_logged_user();
+			try
+			{
+				$user = $this->model->get_logged_user();
+			}
+			catch (PDOException $ex)
+			{
+				header('Location: /db_error');
+				exit;
+			}
 			$subject = "Confirm your account";
 			$main = "Dear $user! Click to this link to confirm your account: http://".$_SERVER['SERVER_NAME'].":8080/link/$link";
 			$main = wordwrap($main, 65, "\r\n");

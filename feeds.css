@@ -4,7 +4,11 @@ body
 	background-attachment: fixed, fixed;
 }
 
-
+.like
+{
+	font-size: 20px;
+	color: #ff6c6c;
+}
 
 a
 {
@@ -57,7 +61,7 @@ a
 {
 	background-color: #ffe6e6;
 	margin-top: 2px;
-	padding: 5px;
+	padding: 10px;
 	border-radius: 0 0 10px 10px;
 }
 

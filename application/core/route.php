@@ -63,7 +63,17 @@ class Route
 		}
 		
 		// создаем контроллер
-		$controller = new $controller_name;
+
+		try
+		{
+			$controller = new $controller_name;
+		}
+		catch (PDOException $ex)
+		{
+			header('Location: /db_error');
+			exit;
+		}
+
 		$action = $action_name;
 		if(method_exists($controller, $action))
 		{
@@ -72,7 +82,7 @@ class Route
 		}
 		else
 		{
-			echo $action;
+			//echo $action;
 			// здесь также разумнее было бы кинуть исключение
 			Route::ErrorPage404();
 		}
@@ -81,11 +91,13 @@ class Route
 	
 	function ErrorPage404()
 	{
-       /* $host = 'http://'.$_SERVER['HTTP_HOST'].'/';
+		//$host = 'http://'.$_SERVER['HTTP_HOST'].'/';
+	//	echo $_SERVER['HTTP_HOST'];
         header('HTTP/1.1 404 Not Found');
 		header("Status: 404 Not Found");
-		header('Location:'.$host.'404');*/
-		include('404.php');
+		//header('Location: /404');
+		//echo "krk";
+		//include('404.php');
 		exit();
     }
 }

@@ -64,6 +64,10 @@ function set_int_check() {
 				}
 				is_in_request = 0;
 			}
+			else if (request.readyState == 4 && request.status == 204)
+			{
+				document.location.href = '/db_error';
+			}
 		}
 	}
 }
@@ -105,6 +109,10 @@ function set_int() {
 					field.scrollTop = field.scrollHeight;
 				}
 				is_in_request = 0;
+			}
+			else if (request.readyState == 4 && request.status == 204)
+			{
+				document.location.href = '/db_error';
 			}
 		}
 	}
@@ -163,8 +171,8 @@ function open_dialog(elem) {
 		}
 		field.insertAdjacentHTML("afterEnd", '<div class="publish_footer">' +
 			'<form method="POST" class="new_message">' +
-			'<input type="text" name="text">' +
-			'<button  type="button" onclick="f_new_message();">отправить</button>' +
+			'<input type="text" class="mess_input" name="text">' +
+			'<button  type="button" class="mess_submit" onclick="f_new_message();">отправить</button>' +
 			'</form>' +
 			'</div>');
 		field.scrollTop = field.scrollHeight;
@@ -185,13 +193,12 @@ function f_new_message() {
 	request.send(formData);
 
 	// Функция для наблюдения изменения состояния request.readyState обновления statusMessage соответственно
-	// request.onreadystatechange = function () {
-	// 	if (request.readyState == 4 && request.status == 200) {
-	// 		//document.querySelector('#myip').innerHTML = request.responseText;
-	// 		//par.insertAdjacentHTML("beforeBegin", request.responseText);
-	// 		//alert(request.responseText);
-	// 	}
-	// }
+	request.onreadystatechange = function () {
+		if (request.readyState == 4 && request.status == 204)
+		{
+			document.location.href = '/db_error';
+		}
+	 }
 }
 
 function create_dialog_with(elem) {
@@ -216,6 +223,10 @@ function ajaxGET(url, elem, callback) {
 			//document.querySelector('#myip').innerHTML = request.responseText;
 			callback(request.responseText, elem);
 			is_in_request = 0;
+		}
+		else if (request.readyState == 4 && request.status == 204)
+		{
+			document.location.href = '/db_error';
 		}
 	}
 	request.open('GET', url);
