@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+</head>
+<body style="position: relative;">
+
+<img src="ball.svg" style="cursor: pointer; position: absolute; z-index: 1000; left: 429px; top: 40px;" width="50" height="50" id="ball"/>
+
+
+
+
+
+<script>
+
+//
+var ball = document.getElementById('ball');
+ball.onmousedown = function(e) {
+  var self = this;
+  //e = fixEvent(e);
+  this.style.position = 'absolute';
+  moveAt(e);
+  document.body.appendChild(this);
+  this.style.zIndex = 1000;
+
+  function moveAt(e) {
+    self.style.left = e.pageX-25+'px';
+    self.style.top = e.pageY-25+'px';
+   }
+  document.onmousemove = function(e) {
+   // e = fixEvent(e);
+    moveAt(e);
+  }
+  this.onmouseup = function() {
+    document.onmousemove = self.onmouseup = null;
+  }
+}
+ball.ondragstart = function() {
+  return false;
+};
+</script>
+</body>
+</html>

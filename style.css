@@ -187,6 +187,7 @@ body
 	background-color: #ffe6e6;
 	display: none;
 	margin-bottom: 5px;
+	margin-top: 5px;
 }
 
 
@@ -278,5 +279,50 @@ h3
 
 .input_label img
 {
+	margin-top: 5px;
 	width: 580px;
+}
+
+#canvas
+{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	display: none;
+}
+#reset
+{
+	display:none;
+}
+
+#stickers
+{
+	display: none;
+}
+
+.stickers_pack
+{
+	display: none;
+}
+
+.sticker_image
+{
+	height: 150px;
+}
+
+#snap
+{
+	display: none;
+}
+
+.stickers_field
+{
+	position: absolute;
+}
+.sticker
+{
+	height: 150px;
+	position: relative;
+	top:200px;
+	left:200px;
+	z-index: 300;
 }

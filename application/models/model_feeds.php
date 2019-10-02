@@ -70,7 +70,7 @@ class model_feeds extends model
 	{
 		if (!isset($_SESSION))
 			session_start();
-		if (($_FILES['file']['error']) == 0)
+		if (isset($_FILES['file']) && ($_FILES['file']['error']) == 0)
 		{
 			$basename = basename($_FILES['file']['name']);
 			preg_match("/\.([a-zA-Z0-9]*)$/", $basename, $matches);

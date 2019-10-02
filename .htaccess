@@ -11,6 +11,7 @@ RewriteCond %{REQUEST_URI} !^\/(.*).gif
 RewriteCond %{REQUEST_URI} !^\/(.*).jpg
 RewriteCond %{REQUEST_URI} !^\/(.*).jpeg
 RewriteCond %{REQUEST_URI} !^\/(.*).js
+RewriteCond %{REQUEST_URI} !^\/(.*).svg
 
 
 

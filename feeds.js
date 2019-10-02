@@ -1,6 +1,8 @@
 var is_in_request = 0;
 var is_edotor_opened = 0;
 var is_camera_active = 0;
+var file = null;
+//var stickers = new Array();
 
 var isMobile = {
 	Android: function () {
@@ -22,6 +24,7 @@ var isMobile = {
 		return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
 	}
 };
+
 
 
 window.onload = function () {
@@ -47,58 +50,215 @@ window.onload = function () {
 
 
 
-		
+	//var dropzone = document.querySelector('.input_label');
+	document.addEventListener("dragover", function(event) {
+		// prevent default to allow drop
+		event.preventDefault();
+	  }, false);
 
-		/*
-		var video = document.getElementById('video');
-		var mediaConfig =  { video: true };
-		if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
+	document.addEventListener("drop", function(event) {
+		event.preventDefault();
+
+		if (event.target.className == 'dropzone')
 		{
-			navigator.mediaDevices.getUserMedia(mediaConfig).then(function(stream) {
-				video.srcObject = stream;
-				 //video.play();
-			});
-		}*/
+			var src = document.querySelector('#src');
+			var reset = document.querySelector('#reset');
+			var label = document.querySelector('.input_label');
+			var canvas = document.querySelector('#canvas');
+			var stickers_button = document.querySelector('#stickers');
+			label.style.display = 'none';
+			src.style.display = 'none';
+			canvas.style.display = 'block';
+			file = event.dataTransfer.files[0];
+			reset.style.display = 'inline';
+			stickers_button.style.display = 'inline';
+			previewFile();
+		}
+	}, false);
+
 }
+
+function snap()
+{
+	var src = document.querySelector('#src');
+	var canvas = document.querySelector('#canvas');
+	var reset = document.querySelector('#reset');
+	var stickers_button = document.querySelector('#stickers');
+	var video = document.querySelector('#video');
+	var label = document.querySelector('.input_label');
+	
+	var context = canvas.getContext('2d');
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	context.drawImage(video, 0, 0, 580, 435);
+	camera();
+	src.style.display = 'none';
+	//file = null;
+	canvas.style.display = 'block';
+	stickers_button.style.display = 'inline';
+	label.style.display = 'none';
+	reset.style.display = 'inline';
+}
+
+function show_stickers()
+{
+	var stickers = document.querySelector('.stickers_pack');
+
+	stickers.style.display = "block";
+}
+
+function add_sticker(sticker)
+{
+	var stickers_field = document.querySelector('.stickers_field');
+	var sticker_elem = document.createElement('img');
+	sticker_elem.src = sticker.src;
+//	sticker_elem.style.top = 200+'px';
+//	sticker_elem.style.left = 200+'px';
+	sticker_elem.classList.add('sticker');
+	
+
+	sticker_elem.onmousedown = function(e) {
+		var canvas = document.querySelector('#canvas');
+		var rect = canvas.getBoundingClientRect();
+		console.log(rect.top);
+		console.log(rect.left);
+		if (e.button == 2)
+		{
+			e.preventDefault();
+			this.remove();
+			return ;
+		}
+		var self = this;
+		//e = fixEvent(e);
+	//	this.style.position = 'relative';
+		moveAt(e);
+		document.body.appendChild(this);
+		this.style.zIndex = 1000;
+	  
+		function moveAt(e) {
+			var canvas = document.querySelector('#canvas');
+			//if (e.pageX - rect.left > 75 && e.pageX < rect.left + 505)
+				  self.style.left = Math.round(e.pageX - rect.left- 75) +'px';
+			//if (e.pageY - rect.top > 75 && e.pageY < rect.top + canvas.height - 75)
+				  self.style.top = Math.round(e.pageY - rect.top - 75) +'px';
+				  //console.log(self.style.left);
+				  ///console.log(self.style.top);
+		 }
+		document.onmousemove = function(e) {
+		 // e = fixEvent(e);
+		  moveAt(e);
+		}
+		this.onmouseup = function() {
+		  document.onmousemove = self.onmouseup = null;
+		}
+	  }
+	  sticker_elem.ondragstart = function() {
+		return false;
+	  };
+
+
+	stickers_field.prepend(sticker_elem);
+	  //alert(sticker_elem.style.top);
+
+}
+
+function reset()
+{
+	var src = document.querySelector('#src');
+	var label = document.querySelector('.input_label');
+	var canvas = document.querySelector('#canvas');
+	var reset = document.querySelector('#reset');
+	var stickers_button = document.querySelector('#stickers');
+	var stickers_pack = document.querySelector('.stickers_pack');
+	var stickers_field = document.querySelector('.stickers_field');
+	
+/*	for (st in stickers)
+	{
+		st.remove();
+	}*/
+	stickers_field.innerHTML = '';
+	canvas.height = 435;
+	var context = canvas.getContext('2d');
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	src.style.display = 'inline';
+	file = null;
+	canvas.style.display = 'none';
+	stickers_button.style.display = 'none';
+	stickers_pack.style.display = 'none';
+	label.style.display = 'block';
+	reset.style.display = 'none';
+}
+
+function previewFile()
+{
+	var image = new Image();
+	var canvas = document.getElementById('canvas');
+	
+	var reader  = new FileReader();
+	
+  
+	reader.onloadend = function () {
+		image.src = reader.result;
+	}
+	image.onload = function() {
+		var height = image.height * 580 / image.width;
+		canvas.height = height;
+		var context = canvas.getContext('2d');
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		context.drawImage(image, 0, 0, 580, height);
+	};
+	if (file) {
+	  reader.readAsDataURL(file);
+	} else {
+	  image.src = "";
+	}
+  }
 
 function camera()
 {
 	var label = document.querySelector('.input_label');
 	var video = document.getElementById('video');
+	var button = document.getElementById('src');
+	var snap = document.getElementById('snap');
 	if (is_camera_active === 0)
 	{
 		label.style.display = 'none';
 		video.style.display = 'block';
-		is_camera_active = 1;
+		snap.style.display = 'inline';
+		
 		var mediaConfig =  { video: true };
 		if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
 		{
 			navigator.mediaDevices.getUserMedia(mediaConfig).then(function(stream) {
 				video.srcObject = stream;
-				 video.play();
+				video.play();
 			});
 		}
+		is_camera_active = 1;
+		button.innerHTML = 'Файл';
 	}
 	else
 	{
+		let stream = video.srcObject;
+		if (stream === null)
+			return ;
 		label.style.display = 'block';
 		video.style.display = 'none';
-		is_camera_active = 0;
-
-		let stream = video.srcObject;
+		snap.style.display = 'none';
   		let tracks = stream.getTracks();
 
   		tracks.forEach(function(track) {
     		track.stop();
   		});
 
-  		video.srcObject = null;
+		video.srcObject = null;
+		is_camera_active = 0;
+		button.innerHTML = 'Камера';
 	}
 }
 
 function open_image_editor()
 {
-	var video = document.getElementById('video');
+	//var video = document.getElementById('video');
 	var editor = document.querySelector('.editor');
 	if (is_edotor_opened === 0)
 	{
@@ -108,19 +268,22 @@ function open_image_editor()
 	else
 	{
 		is_edotor_opened = 0;
+		reset();
+		// let stream = video.srcObject;
+		// if (stream !== null)
+		// {
+		// 	let tracks = stream.getTracks();
 
-		let stream = video.srcObject;
-  		let tracks = stream.getTracks();
+		// 	tracks.forEach(function(track) {
+		// 		track.stop();
+		// 	});
 
-  		tracks.forEach(function(track) {
-    		track.stop();
-  		});
-
-  		video.srcObject = null;
+		// 	video.srcObject = null;
+		// }
 		editor.style.display = 'none';
 
-		is_camera_active = 1;
-		camera();
+		if (is_camera_active === 1)
+			camera();
 	}
 }
 
@@ -161,15 +324,37 @@ function set_int_check() {
 	}
 }
 
+function input_change()
+{
+	var inp = document.querySelector('.input_file');
+	file = inp.files[0];
+	var label = document.querySelector('.input_label');
+	var src = document.querySelector('#src');
+	var canvas = document.querySelector('#canvas');
+	var reset = document.querySelector('#reset');
+	var stickers_button = document.querySelector('#stickers');
+
+	src.style.display = 'none';
+	label.style.display = 'none';
+	canvas.style.display = 'block';
+	reset.style.display = 'inline';
+	stickers_button.style.display = "inline";
+	previewFile();
+}
+
 function new_publish(elem) {
 	var forme = elem.parentNode;
 	var request = new XMLHttpRequest();
 	request.open('POST', '/feeds/new_publish', true);
 
 	var formData = new FormData(forme);
+	formData.get
 	is_in_request = 1;
+	//if (file !== null)
+		formData.append('file', file);
 	request.send(formData);
 
+	
 	// Функция для наблюдения изменения состояния request.readyState обновления statusMessage соответственно
 	request.onreadystatechange = function () {
 		if (request.readyState == 4 && request.status == 200) {
