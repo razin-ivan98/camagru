@@ -22,14 +22,14 @@
 			print		'<input type="text" class="new_publ_input" name="description">';
 			print		'<button onclick="open_image_editor();" class="new_publ_image_button" type="button"><img src="Image.png"></button>';
 			print		'<button onclick="new_publish(this);"  class="mess_submit" type="button">Отправить</button>';
-			print '<input type="file" name="file">';
+			//print '<input type="file" name="file">';
 			print	'</form>';
 			print '<div class="editor">';
 			
 			print '<video id="video" width="580" height="435" autoplay></video>';
 			
-			print '<input type="file" class="input_file" name="file">';
-			print '<label class="input_label" for="file-input"><img src="drop.png"></label>';
+			print '<input type="file" id="file_input" class="input_file" name="file">';
+			print '<label class="input_label" for="file_input"><img src="drop.png"></label>';
 			print '<button onclick="camera();"  class="mess_submit" type="button">Камера</button>';;
 			print '</div>';
 
