@@ -64,11 +64,13 @@ window.onload = function () {
 			var src = document.querySelector('#src');
 			var reset = document.querySelector('#reset');
 			var label = document.querySelector('.input_label');
-			var canvas = document.querySelector('#canvas');
+			var canvases = document.querySelector('.canvases');
+		
 			var stickers_button = document.querySelector('#stickers');
 			label.style.display = 'none';
 			src.style.display = 'none';
-			canvas.style.display = 'block';
+			canvases.style.display = 'block';
+			stickers_canvas.style.display = 'block';
 			file = event.dataTransfer.files[0];
 			reset.style.display = 'inline';
 			stickers_button.style.display = 'inline';
@@ -80,8 +82,10 @@ window.onload = function () {
 
 function snap()
 {
+	var canvases = document.querySelector('.canvases');
 	var src = document.querySelector('#src');
 	var canvas = document.querySelector('#canvas');
+	var stickers_canvas = document.querySelector('#stickers_canvas');
 	var reset = document.querySelector('#reset');
 	var stickers_button = document.querySelector('#stickers');
 	var video = document.querySelector('#video');
@@ -93,7 +97,8 @@ function snap()
 	camera();
 	src.style.display = 'none';
 	//file = null;
-	canvas.style.display = 'block';
+	//canvas.style.display = 'block';
+	canvases.style.display = 'block';
 	stickers_button.style.display = 'inline';
 	label.style.display = 'none';
 	reset.style.display = 'inline';
@@ -108,56 +113,54 @@ function show_stickers()
 
 function add_sticker(sticker)
 {
-	var stickers_field = document.querySelector('.stickers_field');
-	var sticker_elem = document.createElement('img');
-	sticker_elem.src = sticker.src;
-//	sticker_elem.style.top = 200+'px';
-//	sticker_elem.style.left = 200+'px';
-	sticker_elem.classList.add('sticker');
+	var stickers_canvas = document.querySelector('#stickers_canvas');
+	var context = stickers_canvas.getContext("2d");
+
+	context.drawImage(sticker, 200, 200, 150, 150);
 	
 
-	sticker_elem.onmousedown = function(e) {
-		var canvas = document.querySelector('#canvas');
-		var rect = canvas.getBoundingClientRect();
-		console.log(rect.top);
-		console.log(rect.left);
-		if (e.button == 2)
-		{
-			e.preventDefault();
-			this.remove();
-			return ;
-		}
-		var self = this;
-		//e = fixEvent(e);
-	//	this.style.position = 'relative';
-		moveAt(e);
-		document.body.appendChild(this);
-		this.style.zIndex = 1000;
+	// sticker_elem.onmousedown = function(e) {
+	// 	var canvas = document.querySelector('#canvas');
+	// 	var rect = canvas.getBoundingClientRect();
+	// 	console.log(rect.top);
+	// 	console.log(rect.left);
+	// 	if (e.button == 2)
+	// 	{
+	// 		e.preventDefault();
+	// 		this.remove();
+	// 		return ;
+	// 	}
+	// 	var self = this;
+	// 	//e = fixEvent(e);
+	// //	this.style.position = 'relative';
+	// 	moveAt(e);
+	// 	document.body.appendChild(this);
+	// 	this.style.zIndex = 1000;
 	  
-		function moveAt(e) {
-			var canvas = document.querySelector('#canvas');
-			//if (e.pageX - rect.left > 75 && e.pageX < rect.left + 505)
-				  self.style.left = Math.round(e.pageX - rect.left- 75) +'px';
-			//if (e.pageY - rect.top > 75 && e.pageY < rect.top + canvas.height - 75)
-				  self.style.top = Math.round(e.pageY - rect.top - 75) +'px';
-				  //console.log(self.style.left);
-				  ///console.log(self.style.top);
-		 }
-		document.onmousemove = function(e) {
-		 // e = fixEvent(e);
-		  moveAt(e);
-		}
-		this.onmouseup = function() {
-		  document.onmousemove = self.onmouseup = null;
-		}
-	  }
-	  sticker_elem.ondragstart = function() {
-		return false;
-	  };
+	// 	function moveAt(e) {
+	// 		var canvas = document.querySelector('#canvas');
+	// 		//if (e.pageX - rect.left > 75 && e.pageX < rect.left + 505)
+	// 			  self.style.left = Math.round(e.pageX - rect.left- 75) +'px';
+	// 		//if (e.pageY - rect.top > 75 && e.pageY < rect.top + canvas.height - 75)
+	// 			  self.style.top = Math.round(e.pageY - rect.top - 75) +'px';
+	// 			  //console.log(self.style.left);
+	// 			  ///console.log(self.style.top);
+	// 	 }
+	// 	document.onmousemove = function(e) {
+	// 	 // e = fixEvent(e);
+	// 	  moveAt(e);
+	// 	}
+	// 	this.onmouseup = function() {
+	// 	  document.onmousemove = self.onmouseup = null;
+	// 	}
+	//   }
+	//   sticker_elem.ondragstart = function() {
+	// 	return false;
+	//   };
 
 
-	stickers_field.prepend(sticker_elem);
-	  //alert(sticker_elem.style.top);
+	// stickers_field.prepend(sticker_elem);
+	//   //alert(sticker_elem.style.top);
 
 }
 
@@ -166,6 +169,7 @@ function reset()
 	var src = document.querySelector('#src');
 	var label = document.querySelector('.input_label');
 	var canvas = document.querySelector('#canvas');
+	var canvases = document.querySelector('.canvases');
 	var reset = document.querySelector('#reset');
 	var stickers_button = document.querySelector('#stickers');
 	var stickers_pack = document.querySelector('.stickers_pack');
@@ -181,7 +185,7 @@ function reset()
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	src.style.display = 'inline';
 	file = null;
-	canvas.style.display = 'none';
+	canvases.style.display = 'none';
 	stickers_button.style.display = 'none';
 	stickers_pack.style.display = 'none';
 	label.style.display = 'block';
@@ -330,13 +334,13 @@ function input_change()
 	file = inp.files[0];
 	var label = document.querySelector('.input_label');
 	var src = document.querySelector('#src');
-	var canvas = document.querySelector('#canvas');
+	var canvases = document.querySelector('.canvases');
 	var reset = document.querySelector('#reset');
 	var stickers_button = document.querySelector('#stickers');
 
 	src.style.display = 'none';
 	label.style.display = 'none';
-	canvas.style.display = 'block';
+	canvases.style.display = 'block';
 	reset.style.display = 'inline';
 	stickers_button.style.display = "inline";
 	previewFile();

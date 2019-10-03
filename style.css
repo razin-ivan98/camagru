@@ -24,10 +24,10 @@ body
 	border: 1px solid #ff6c6c;
 	border-radius: 3px;
 	font-size: 18px;
-   background: #ffdada !important; 
-   outline: none; 
-   color: #ff6c6c;
-   font-family: Linden Hill;
+	background: #ffdada !important; 
+	outline: none; 
+	color: #ff6c6c;
+	font-family: Linden Hill;
 }
 .mess_submit
 {
@@ -283,12 +283,30 @@ h3
 	width: 580px;
 }
 
-#canvas
+
+
+.canvases
 {
 	margin-top: 5px;
 	margin-bottom: 5px;
 	display: none;
+	position: relative;
+	height: 435px;
 }
+#canvas
+{
+	position: absolute;
+	top: 0px;
+}
+#stickers_canvas
+{
+	position: absolute;
+	top: 0px;
+
+
+}
+
+
 #reset
 {
 	display:none;
@@ -318,11 +336,12 @@ h3
 {
 	position: absolute;
 }
-.sticker
+
+/* .sticker
 {
 	height: 150px;
 	position: relative;
 	top:200px;
 	left:200px;
 	z-index: 300;
-}
+} */

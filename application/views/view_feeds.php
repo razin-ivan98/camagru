@@ -31,7 +31,12 @@
 			print '<input type="file" id="file_input" onchange="input_change();" class="input_file" name="file">';
 			print '<label class="input_label" for="file_input"><img class="dropzone" src="drop.png"></label>';
 			print '<div class="stickers_field"></div>';
+
+			print '<div class="canvases">';
 			print '<canvas id="canvas" width="580" height="435"></canvas>';
+			print '<canvas id="stickers_canvas" width="580" height="435"></canvas>';
+			print '</div>';
+
 			print '<button onclick="camera();" id="src" class="mess_submit" type="button">Камера</button>';
 			print '<button onclick="show_stickers();" id="stickers" class="mess_submit" type="button">Стикеры</button>';
 			print '<button onclick="reset();" id="reset" class="mess_submit" type="button">Сбросить</button>';
