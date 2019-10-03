@@ -319,7 +319,13 @@ h3
 
 .stickers_pack
 {
+	margin-top: 10px;
 	display: none;
+	height: 200px;
+	overflow-y: scroll;
+	border: 2px solid #ffc6c6;
+    border-radius: 10px;
+	padding: 5px;
 }
 
 .sticker_image
@@ -332,10 +338,7 @@ h3
 	display: none;
 }
 
-.stickers_field
-{
-	position: absolute;
-}
+
 
 /* .sticker
 {

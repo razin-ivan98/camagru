@@ -30,7 +30,7 @@
 			
 			print '<input type="file" id="file_input" onchange="input_change();" class="input_file" name="file">';
 			print '<label class="input_label" for="file_input"><img class="dropzone" src="drop.png"></label>';
-			print '<div class="stickers_field"></div>';
+
 
 			print '<div class="canvases">';
 			print '<canvas id="canvas" width="580" height="435"></canvas>';
@@ -42,9 +42,30 @@
 			print '<button onclick="reset();" id="reset" class="mess_submit" type="button">Сбросить</button>';
 			print '<button onclick="snap();" id="snap" class="mess_submit" type="button">Щелк</button>';
 			print '<div class="stickers_pack">';
+
 			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/pepe.png">';
 			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/bear.png">';
 			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/avo.png">';
+
+			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/2.png">';
+			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/7.png">';
+			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/10.png">';
+			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/11.png">';
+			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/20.png">';
+			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/21.png">';
+			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/29.png">';
+			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/31_1.png">';
+			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/35.png">';
+			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/40.png">';
+			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/41.png">';
+			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/51.png">';
+
+			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/52.png">';
+			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/57.png">';
+			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/66.png">';
+			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/75.png">';
+			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/78.png">';
+			print '<img class="sticker_image" onclick="add_sticker(this);" src="stickers/84.png">';
 
 			print '</div>';
 			print '</div>';

@@ -70,18 +70,40 @@ class model_feeds extends model
 	{
 		if (!isset($_SESSION))
 			session_start();
-		if (isset($_FILES['file']) && ($_FILES['file']['error']) == 0)
+		if (isset($_POST['canvas']) && isset($_POST['stickers']))
 		{
-			$basename = basename($_FILES['file']['name']);
-			preg_match("/\.([a-zA-Z0-9]*)$/", $basename, $matches);
-			$type = $matches[1];
-			$name = md5($basename) . "." .  $type;
+			$canvas = $_POST['canvas'];
+			$stickers = $_POST['stickers'];
+			
+			$canvas = str_replace('data:image/png;base64,', '', $canvas);
+			$stickers = str_replace('data:image/png;base64,', '', $stickers);
+			//$canvas = str_replace(' ', '+', $img);
+			//$stickers = str_replace(' ', '+', $img);
+			$tmp = $canvas;
+
+			$canvas = base64_decode($canvas);
+			$stickers = base64_decode($stickers);
+			//saving
+			$fileName = 'tmp/canvas.png';
+			file_put_contents($fileName, $canvas);
+			$fileName = 'tmp/stickers.png';
+			file_put_contents($fileName, $stickers);
+
+			$img = imagecreatefrompng('tmp/canvas.png');
+			$img_stickers = imagecreatefrompng('tmp/stickers.png');
+			imagesavealpha ($img , true);
+			imagesavealpha ($img_stickers , true);
+			imagecopy($img, $img_stickers, 0, 0, 0, 0, imagesx($img), imagesx($img_stickers));
+
+			$basename = md5($canvas);
+			
+			$name = md5($basename) . "." .  "png";
 			while(file_exists("images/".$name))
 			{
-				$name = md5($name) . "." .  $type;
+				$name = md5($name) . "." .  "png";
 			}
 			$uploadfile = "images/" . $name;
-			move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile);
+			imagepng($img, $uploadfile);
 		}
 		else
 			$name = 'non';

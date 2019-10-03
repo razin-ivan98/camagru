@@ -2,7 +2,13 @@ var is_in_request = 0;
 var is_edotor_opened = 0;
 var is_camera_active = 0;
 var file = null;
-//var stickers = new Array();
+var stickers = new Array();
+var src_image = new Image();
+var curr_sticker = null;
+var is_move = 0;
+var delta_x;
+var delta_y;
+var is_image = 0;
 
 var isMobile = {
 	Android: function () {
@@ -78,6 +84,85 @@ window.onload = function () {
 		}
 	}, false);
 
+	var stickers_canvas = document.querySelector('#stickers_canvas');
+
+	window.onmouseup = function()
+	{
+		is_move = 0;
+	}
+
+	stickers_canvas.onmousemove = function(e) {
+		if (is_move == 0)
+			return;
+		var rect = this.getBoundingClientRect();
+	    //var canvas = document.querySelector('#canvas');
+		if (e.pageX > rect.left && e.pageX < rect.left + 580)
+			stickers[curr_sticker].x = Math.round(e.pageX - rect.left- delta_x);
+		if (e.pageY > rect.top && e.pageY < rect.top + this.height)
+			stickers[curr_sticker].y = Math.round(e.pageY - rect.top- delta_y);
+		refresh_stickers_canvas();
+		
+	}
+
+	stickers_canvas.onmousedown = function(e) {
+			//var canvas = document.querySelector('#canvas');
+			var rect = this.getBoundingClientRect();
+		//	console.log(rect.top);
+		//	console.log(rect.left);
+		//	if (e.button == 2)
+		//	{
+		//		e.preventDefault();
+		//		this.remove();
+		//		return ;
+		//	}
+		if (e.button == 2)
+		{
+			return (false);
+		}
+		for (var i = 0; i < stickers.length; i++)
+		{
+			if (e.pageX > rect.left + stickers[i].x &&
+				e.pageX < rect.left + stickers[i].x + 150 &&
+				e.pageY > rect.top + stickers[i].y &&
+				e.pageY < rect.top + stickers[i].y + 150)
+			{
+				curr_sticker = i;
+				delta_x = e.pageX - rect.left - stickers[i].x;
+				delta_y = e.pageY - rect.top - stickers[i].y;
+				is_move = 1;
+			}
+			
+		}
+		//alert(curr_sticker);
+		//	var self = this;
+			//e = fixEvent(e);
+		//	this.style.position = 'relative';
+		//	moveAt(e);
+		//	document.body.appendChild(this);
+		//	this.style.zIndex = 1000;
+		  
+		/*	function moveAt(e) {
+				//var canvas = document.querySelector('#canvas');
+				if (e.pageX > rect.top && e.pageX < rect.top + 580)
+					  stickers[curr_sticker].x = Math.round(e.pageX - rect.left - delta_x) +'px';
+			/*	if (e.pageY - rect.top > 75 && e.pageY < rect.top + canvas.height - 75)
+					  self.style.top = Math.round(e.pageY - rect.top - 75) +'px';*/
+					  //console.log(self.style.left);
+					  ///console.log(self.style.top);
+				/*	  alert(stickers[0].x);
+					  refresh_stickers_canvas();
+	}*/
+			//stickers_canvas.onmousemove = function(e) {
+			 // e = fixEvent(e);
+			//  moveAt(e);
+			//}
+			//this.onmouseup = function() {
+			//  document.onmousemove = stickers_canvas.onmouseup = null;
+			//}
+		}
+		 /* sticker_elem.ondragstart = function() {
+			return false;
+		  };*/
 }
 
 function snap()
@@ -85,7 +170,7 @@ function snap()
 	var canvases = document.querySelector('.canvases');
 	var src = document.querySelector('#src');
 	var canvas = document.querySelector('#canvas');
-	var stickers_canvas = document.querySelector('#stickers_canvas');
+	//var stickers_canvas = document.querySelector('#stickers_canvas');
 	var reset = document.querySelector('#reset');
 	var stickers_button = document.querySelector('#stickers');
 	var video = document.querySelector('#video');
@@ -93,7 +178,8 @@ function snap()
 	
 	var context = canvas.getContext('2d');
 	context.clearRect(0, 0, canvas.width, canvas.height);
-	context.drawImage(video, 0, 0, 580, 435);
+	src_image = video;
+	context.drawImage(src_image, 0, 0, 580, 435);
 	camera();
 	src.style.display = 'none';
 	//file = null;
@@ -102,6 +188,7 @@ function snap()
 	stickers_button.style.display = 'inline';
 	label.style.display = 'none';
 	reset.style.display = 'inline';
+	is_image = 1;
 }
 
 function show_stickers()
@@ -111,12 +198,35 @@ function show_stickers()
 	stickers.style.display = "block";
 }
 
-function add_sticker(sticker)
+function refresh_stickers_canvas()
 {
 	var stickers_canvas = document.querySelector('#stickers_canvas');
-	var context = stickers_canvas.getContext("2d");
+	var context = stickers_canvas.getContext('2d');
+	context.clearRect(0, 0, stickers_canvas.width, stickers_canvas.height);
+	//context.drawImage(src_image, 0, 0, 580, 435);
+	for (var i = 0; i < stickers.length; i++)
+	{
+		//console.log(stickers[i].image);
+		context.drawImage(stickers[i].image, stickers[i].x, stickers[i].y, 150, 150);
+	}
+}
 
-	context.drawImage(sticker, 200, 200, 150, 150);
+function add_sticker(sticker)
+{
+	//var stickers_canvas = document.querySelector('#stickers_canvas');
+	var new_sticker = new Object;
+	//console.log(sticker);
+	new_sticker = {
+		image: sticker,
+		id: sticker.id,
+		x: 0,
+		y: 0
+	}
+	stickers.push(new_sticker);
+	refresh_stickers_canvas();
+//	var context = stickers_canvas.getContext("2d");
+
+//	context.drawImage(sticker, 200, 200, 150, 150);
 	
 
 	// sticker_elem.onmousedown = function(e) {
@@ -169,6 +279,7 @@ function reset()
 	var src = document.querySelector('#src');
 	var label = document.querySelector('.input_label');
 	var canvas = document.querySelector('#canvas');
+	var canvas_stickers = document.getElementById('stickers_canvas');
 	var canvases = document.querySelector('.canvases');
 	var reset = document.querySelector('#reset');
 	var stickers_button = document.querySelector('#stickers');
@@ -179,8 +290,9 @@ function reset()
 	{
 		st.remove();
 	}*/
-	stickers_field.innerHTML = '';
 	canvas.height = 435;
+	canvas_stickers.height = 435;
+	canvases.style.height = 435+'px';
 	var context = canvas.getContext('2d');
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	src.style.display = 'inline';
@@ -190,12 +302,19 @@ function reset()
 	stickers_pack.style.display = 'none';
 	label.style.display = 'block';
 	reset.style.display = 'none';
+	while(stickers.length > 0) {
+		stickers.pop();
+	}
+	curr_sticker = null;
+	is_image = 0;
 }
 
 function previewFile()
 {
 	var image = new Image();
 	var canvas = document.getElementById('canvas');
+	var canvas_stickers = document.getElementById('stickers_canvas');
+	var canvases = document.querySelector('.canvases');
 	
 	var reader  = new FileReader();
 	
@@ -206,6 +325,8 @@ function previewFile()
 	image.onload = function() {
 		var height = image.height * 580 / image.width;
 		canvas.height = height;
+		canvas_stickers.height = height;
+		canvases.style.height = height+'px';
 		var context = canvas.getContext('2d');
 		context.clearRect(0, 0, canvas.width, canvas.height);
 		context.drawImage(image, 0, 0, 580, height);
@@ -215,6 +336,8 @@ function previewFile()
 	} else {
 	  image.src = "";
 	}
+	src_image = image;
+	is_image = 1;
   }
 
 function camera()
@@ -258,6 +381,7 @@ function camera()
 		is_camera_active = 0;
 		button.innerHTML = 'Камера';
 	}
+
 }
 
 function open_image_editor()
@@ -347,15 +471,23 @@ function input_change()
 }
 
 function new_publish(elem) {
+	var text_input = document.querySelector('.new_publ_input');
+	var canvas = document.querySelector('#canvas');
+	var stickers_canvas = document.querySelector('#stickers_canvas');
+	var canvasData = canvas.toDataURL();
+	var stickers_canvasData = stickers_canvas.toDataURL();
 	var forme = elem.parentNode;
 	var request = new XMLHttpRequest();
 	request.open('POST', '/feeds/new_publish', true);
 
 	var formData = new FormData(forme);
-	formData.get
+
 	is_in_request = 1;
-	//if (file !== null)
-		formData.append('file', file);
+	if (is_image === 1)
+	{
+		formData.append('canvas', canvasData);
+		formData.append('stickers', stickers_canvasData);
+	}
 	request.send(formData);
 
 	
@@ -366,6 +498,9 @@ function new_publish(elem) {
 			var marg = document.querySelector('#publish_constructor');
 			marg.insertAdjacentHTML("afterEnd", request.responseText);
 			is_in_request = 0;
+			if (is_edotor_opened === 1)
+				open_image_editor();
+			text_input.value = '';
 		}
 		else if (request.readyState == 4 && request.status == 204)
 		{
