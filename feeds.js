@@ -86,83 +86,97 @@ window.onload = function () {
 
 	var stickers_canvas = document.querySelector('#stickers_canvas');
 
-	window.onmouseup = function()
+
+
+	
+	if (isMobile.any())
 	{
-		is_move = 0;
-	}
-
-	stickers_canvas.onmousemove = function(e) {
-		if (is_move == 0)
-			return;
-		var rect = this.getBoundingClientRect();
-	    //var canvas = document.querySelector('#canvas');
-		if (e.pageX > rect.left && e.pageX < rect.left + 580)
-			stickers[curr_sticker].x = Math.round(e.pageX - rect.left- delta_x);
-		if (e.pageY > rect.top && e.pageY < rect.top + this.height)
-			stickers[curr_sticker].y = Math.round(e.pageY - rect.top- delta_y);
-		refresh_stickers_canvas();
-		
-	}
-
-	stickers_canvas.onmousedown = function(e) {
-			//var canvas = document.querySelector('#canvas');
+		stickers_canvas.ontouchmove = function(e){
+			e.preventDefault();
+			console.log(is_move);
+			if (is_move == 0)
+				return;
 			var rect = this.getBoundingClientRect();
-		//	console.log(rect.top);
-		//	console.log(rect.left);
-		//	if (e.button == 2)
-		//	{
-		//		e.preventDefault();
-		//		this.remove();
-		//		return ;
-		//	}
-		if (e.button == 2)
-		{
+			//var canvas = document.querySelector('#canvas');
+			if (e.changedTouches[0].clientX > rect.left && e.changedTouches[0].clientX < rect.left + 580)
+				stickers[curr_sticker].x = Math.round(e.changedTouches[0].clientX - rect.left- delta_x);
+			if (e.changedTouches[0].clientY > rect.top && e.changedTouches[0].clientY < rect.top + this.height)
+				stickers[curr_sticker].y = Math.round(e.changedTouches[0].clientY - rect.top- delta_y);
+			refresh_stickers_canvas();
 			return (false);
 		}
-		for (var i = 0; i < stickers.length; i++)
-		{
-			if (e.pageX > rect.left + stickers[i].x &&
-				e.pageX < rect.left + stickers[i].x + 150 &&
-				e.pageY > rect.top + stickers[i].y &&
-				e.pageY < rect.top + stickers[i].y + 150)
-			{
-				curr_sticker = i;
-				delta_x = e.pageX - rect.left - stickers[i].x;
-				delta_y = e.pageY - rect.top - stickers[i].y;
-				is_move = 1;
-			}
-			
-		}
-		//alert(curr_sticker);
-		//	var self = this;
-			//e = fixEvent(e);
-		//	this.style.position = 'relative';
-		//	moveAt(e);
-		//	document.body.appendChild(this);
-		//	this.style.zIndex = 1000;
-		  
-		/*	function moveAt(e) {
+		stickers_canvas.ontouchstart = function(e) {
 				//var canvas = document.querySelector('#canvas');
-				if (e.pageX > rect.top && e.pageX < rect.top + 580)
-					  stickers[curr_sticker].x = Math.round(e.pageX - rect.left - delta_x) +'px';
-			/*	if (e.pageY - rect.top > 75 && e.pageY < rect.top + canvas.height - 75)
-					  self.style.top = Math.round(e.pageY - rect.top - 75) +'px';*/
-					  //console.log(self.style.left);
-					  ///console.log(self.style.top);
-				/*	  alert(stickers[0].x);
-					  refresh_stickers_canvas();
-	}*/
-			//stickers_canvas.onmousemove = function(e) {
-			 // e = fixEvent(e);
-			//  moveAt(e);
-			//}
-			//this.onmouseup = function() {
-			//  document.onmousemove = stickers_canvas.onmouseup = null;
-			//}
+				console.log('mobile_down');
+				var rect = this.getBoundingClientRect();
+				console.log(rect.left);
+			
+			for (var i = 0; i < stickers.length; i++)
+			{
+				if (e.changedTouches[0].clientX > rect.left + stickers[i].x &&
+					e.changedTouches[0].clientX < rect.left + stickers[i].x + 150 &&
+					e.changedTouches[0].clientY > rect.top + stickers[i].y &&
+					e.changedTouches[0].clientY < rect.top + stickers[i].y + 150)
+				{
+					curr_sticker = i;
+					delta_x = e.changedTouches[0].clientX - rect.left - stickers[i].x;
+					delta_y = e.changedTouches[0].clientY - rect.top - stickers[i].y;
+					is_move = 1;
+				}
+				
+			}
 		}
-		 /* sticker_elem.ondragstart = function() {
-			return false;
-		  };*/
+		window.ontouchend = function()
+		{
+			is_move = 0;
+		}
+	}
+	else
+	{
+		
+		stickers_canvas.onmousedown = function(e) {
+				//var canvas = document.querySelector('#canvas');
+				console.log('down');
+				var rect = this.getBoundingClientRect();
+
+			if (e.button == 2)
+			{
+				return (false);
+			}
+			for (var i = 0; i < stickers.length; i++)
+			{
+				if (e.clientX > rect.left + stickers[i].x &&
+					e.clientX < rect.left + stickers[i].x + 150 &&
+					e.clientY > rect.top + stickers[i].y &&
+					e.clientY < rect.top + stickers[i].y + 150)
+				{
+					curr_sticker = i;
+					delta_x = e.clientX - rect.left - stickers[i].x;
+					delta_y = e.clientY - rect.top - stickers[i].y;
+					is_move = 1;
+				}
+				
+			}
+		}
+		stickers_canvas.onmousemove = function(e) {
+				e.preventDefault();
+				if (is_move == 0)
+					return;
+				var rect = this.getBoundingClientRect();
+				//var canvas = document.querySelector('#canvas');
+				if (e.clientX > rect.left && e.clientX < rect.left + 580)
+					stickers[curr_sticker].x = Math.round(e.clientX - rect.left- delta_x);
+				if (e.clientY > rect.top && e.clientY < rect.top + this.height)
+					stickers[curr_sticker].y = Math.round(e.clientY - rect.top- delta_y);
+				refresh_stickers_canvas();
+				return (false);
+		}
+		window.onmouseup = function()
+		{
+			is_move = 0;
+		}
+	}
+
 }
 
 function snap()
