@@ -62,7 +62,7 @@ class controller_confirm extends controller
 				"Reply-To: picchat.manager@gmail.com"."\r\n".
 				"X-Mailer: PHP/".phpversion();
 			$res = mail($email, $subject, $main, $headers);
-			$res = array('answer' => $res);
+
 			
 			$this->view->response_ajax(array('answer' => $res , 'text' => "error"));
 		}

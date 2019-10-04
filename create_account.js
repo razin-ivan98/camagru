@@ -1,3 +1,15 @@
+window.onload = function()
+{
+	window.onkeypress = function(event)
+	{
+		if (event.keyCode === 13)
+		{
+			event.preventDefault();
+			create_account();
+		}
+	}
+}
+
 function create_account()
 {
 	var forme = document.querySelector('#create_account_form');

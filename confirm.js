@@ -19,8 +19,8 @@ function confirm()
 			var res = JSON.parse(request.responseText);
 			if (res.answer == true)
 			{
-				//alert("The link was send to your email");
-				alert(res.text);
+				alert("The link was send to your email");
+				//alert(res.text);
 				document.location.href = "/login";
 			}
 			else

@@ -20,6 +20,10 @@ class model_link extends model
 			else
 				return false;
 		}
+		else if ($res['0']['reason'] === 'reset')
+		{
+			return ('reset');
+		}
 	}
 
 }

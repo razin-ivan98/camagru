@@ -34,6 +34,15 @@ window.onload = function () {
 		link.setAttribute("href", 'mobile.css');
 		document.getElementsByTagName("head")[0].appendChild(link);
 	}
+	window.onkeypress = function(event)
+	{
+		if (event.keyCode === 13 && document.activeElement.className === 'mess_input')
+		{
+			event.preventDefault();
+			f_new_message();
+		}
+
+	}
 }
 
 function set_int_check() {
@@ -141,6 +150,8 @@ function new_dialog_choose() {
 	});
 }
 
+
+
 function open_dialog(elem) {
 	is_in_request = 1;
 	var title = document.querySelector('.publish_header');
@@ -184,6 +195,7 @@ function open_dialog(elem) {
 
 function f_new_message() {
 	var forme = document.querySelector('.new_message');
+	var edit = document.querySelector('.mess_input');
 
 	var request = new XMLHttpRequest();
 	request.open('POST', 'dialogs/new_message/', true);
@@ -199,6 +211,7 @@ function f_new_message() {
 			document.location.href = '/db_error';
 		}
 	 }
+	 edit.value = '';
 }
 
 function create_dialog_with(elem) {

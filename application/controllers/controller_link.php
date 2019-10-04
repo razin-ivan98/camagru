@@ -5,7 +5,7 @@ class controller_link extends controller
 	function __construct()
 	{
 		$this->model = new model_link();
-		$this->view = new view();
+		$this->view = new View();
 	}
 
 	function link($link)
@@ -14,6 +14,10 @@ class controller_link extends controller
 		if ($res === true)
 		{
 			header("Location: /feeds");
+		}
+		else if ($res === 'reset')
+		{
+			$this->view->generate('view_reset_password.php', 'view_template_login.php', $link);
 		}
 		else
 		{

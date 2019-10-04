@@ -2,11 +2,19 @@
 
 class model_login extends model
 {
-	public function get_data()
-	{	
-		return true;
+	function save_link($link, $reason, $name)
+	{
+		$stmt =	$this->perfom_query("SELECT * FROM users WHERE name=?", array($name));
+		$id = $stmt->fetchall()[0]['id'];
+
+
+		$stmt =	$this->perfom_query("SELECT * FROM links WHERE user_id=?", array($id));
+
+		if (count($stmt->fetchall()) != 0)
+			$this->perfom_query("DELETE FROM links WHERE user_id=?", array($id));
+		$this->perfom_query("INSERT INTO links (user_id, reason, link) VALUES(?, ?, ?)", array($id, $reason, $link));
 	}
-	
+
 	public function login()
 	{
 		if (!isset($_SESSION))
@@ -45,6 +53,13 @@ class model_login extends model
 			$error = "Empty"; 				
 			return $error; 	
 		}
+	}
+
+	function get_email($name)
+	{
+		$rez = $this->perfom_query("SELECT * FROM users WHERE name=?", array($name));
+		$email = $rez->fetchall()[0]['email'];
+		return $email;
 	}
 }
 

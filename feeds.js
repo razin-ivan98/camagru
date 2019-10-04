@@ -177,6 +177,24 @@ window.onload = function () {
 		}
 	}
 
+
+	window.onkeypress = function(event)
+	{
+		if (event.keyCode === 13)
+		{
+			event.preventDefault();
+			if (document.activeElement.className === 'new_publ_input')
+				new_publish();
+			else if (document.activeElement.className === 'mess_input')
+			{
+				var active = document.activeElement;
+				active = active.parentNode;
+				active = active[1];
+				f_new_comment(active);
+			}
+		}
+	}
+
 }
 
 function snap()
@@ -484,13 +502,13 @@ function input_change()
 	previewFile();
 }
 
-function new_publish(elem) {
+function new_publish() {
 	var text_input = document.querySelector('.new_publ_input');
 	var canvas = document.querySelector('#canvas');
 	var stickers_canvas = document.querySelector('#stickers_canvas');
 	var canvasData = canvas.toDataURL();
 	var stickers_canvasData = stickers_canvas.toDataURL();
-	var forme = elem.parentNode;
+	var forme = document.querySelector('#new_publish');
 	var request = new XMLHttpRequest();
 	request.open('POST', '/feeds/new_publish', true);
 
