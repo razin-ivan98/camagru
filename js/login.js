@@ -21,12 +21,12 @@ function log_in()
 		return;
 	}
 	var request = new XMLHttpRequest();
-	request.open('POST', 'login/login', true);
+	request.open('POST', '/login/login', true);
     request.send(formData);
 
 	request.onreadystatechange = function(){ 
 		if (request.readyState == 4 && request.status == 200){
-		//alert(request.responseText);
+
 			var res = JSON.parse(request.responseText);
 			if (res.answer == true)
 				document.location.href = "/feeds";
@@ -50,12 +50,11 @@ function fogotten()
 		return;
 	}
 	var request = new XMLHttpRequest();
-	request.open('POST', 'login/reset_password', true);
+	request.open('POST', '/login/reset_password', true);
     request.send(formData);
 
 	request.onreadystatechange = function(){ 
 		if (request.readyState == 4 && request.status == 200){
-			//alert(request.responseText);
 			var res = JSON.parse(request.responseText);
 			if (res.answer == true)
 				alert("The link was send to your email");

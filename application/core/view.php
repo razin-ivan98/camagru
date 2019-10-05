@@ -2,7 +2,6 @@
 
 class View
 {
-	//public $template_view; // здесь можно указать общий вид по умолчанию.
 	function __construct()
 	{
 	}
@@ -11,7 +10,6 @@ class View
 	{
 		if(is_array($data))
 		{
-			// преобразуем элементы массива в переменные
 			extract($data);
 		}
 		
@@ -28,24 +26,24 @@ class View
 			echo (
 			'<div class="publish" id="'.$publish['id'].'">
 				<div class="publish_header">
-					<div class="avatar"><img src="avatars/'.htmlentities($publish['avatar']).'"></div>
+					<div class="avatar"><img src="/avatars/'.htmlentities($publish['avatar']).'"></div>
 					<div class="author"><h3>'.htmlentities($publish['author']).'</h3></div>'
-					.($publish['is_my'] === true ? '<div class="delete_publish" onclick="delete_publish(this);"><img src="delete.png"></div>' : '').
+					.($publish['is_my'] === true ? '<div class="delete_publish" onclick="delete_publish(this);"><img src="/pics/delete.png"></div>' : '').
 				'</div>
 				<div class="publish_body">
 					'.htmlentities($publish['description']).
-					(($publish['image_name'] === 'non') ? '' : '<img src="images/'.htmlentities($publish['image_name']).'">').
+					(($publish['image_name'] === 'non') ? '' : '<img src="/images/'.htmlentities($publish['image_name']).'">').
 				'<div class="like" onclick="like(this);">'.$liked.htmlentities($publish['likes_count']).'</div></div>
-				<div class="publish_footer">');//////////////////
+				<div class="publish_footer">');
 					
 					foreach($publish['comments'] as $comment)
 					{
 						$comment_liked = ($comment['is_liked'] === false ? '&#x1F497;' : '&#x1F49D;');
 						echo 	'<div class="comment" id='.htmlentities($comment['id']).'>
 									<div class="comment_header">
-										<div class="avatar"><img src="avatars/'.htmlentities($comment['avatar']).'"></div>
+										<div class="avatar"><img src="/avatars/'.htmlentities($comment['avatar']).'"></div>
 										<div class="author"><h3>'.htmlentities($comment['author']).'</h3></div>'
-										.($comment['is_my'] === true ? '<div class="delete_comment" onclick="delete_comment(this);"><img src="delete.png"></div>' : '').
+										.($comment['is_my'] === true ? '<div class="delete_comment" onclick="delete_comment(this);"><img src="/pics/delete.png"></div>' : '').
 									'</div>
 									<div class="comment_body">
 										'.htmlentities($comment['text']).

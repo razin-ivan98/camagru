@@ -8,7 +8,7 @@ class controller_feeds extends controller
 		$this->view = new view();
 	}
 	
-	function action_index()
+	function action_index($params)
 	{
 		if ($this->model->is_logged() == true)
 		{
@@ -17,12 +17,16 @@ class controller_feeds extends controller
 				header("Location: /confirm");
 				return ;
 			}
-
+			if ($params === null)
+				$params = 1;
 			$data = array();		
 			$data['my_name'] = $this->model->get_logged_user();
-			$data['publishes'] = $this->model->get_publishes();
+			$data['publishes'] = $this->model->get_publishes($params);
+			if ($data['publishes'] === false)
+				header('Location: /feeds/index/1');
 			$data['my_avatar'] = $this->model->get_my_avatar();
 			$data['count_of_dialogs_events'] = $this->model->get_count_of_dialogs_events();
+			$data['page'] = $params;
 			$this->view->generate('view_feeds.php', 'view_template.php', $data);
 		}
 		else

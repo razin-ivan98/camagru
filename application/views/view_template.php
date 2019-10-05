@@ -6,22 +6,22 @@
 		<title>PicChat</title>
 	
 		
-		<link rel="stylesheet" href="style.css">
-		<link rel="stylesheet" href="feeds.css">
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/feeds.css">
 
-		<script src="index.js"></script>
+		<script src="/js/index.js"></script>
 	</head>
 	<body>
 		<div class="header">
 			<div class="head">
 				<div class="mobile-menu" onclick="menu();">
-					<img class="mibile-menu-image", src="menu.png">
+					<img class="mibile-menu-image", src="/pics/menu.png">
 					<div class="alert"></div>
 				</div>
 				
 				<div class="logo"> 
 					<a href="/feeds">
-						<img class="logo-image", src="logolong.png">
+						<img class="logo-image", src="/pics/logolong.png">
 					</a>
 				</div>
 				<div class="user">

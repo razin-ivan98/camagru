@@ -2,13 +2,18 @@
 
 class model_feeds extends model
 {
-	public function get_publishes()
+	public function get_publishes($page)
 	{
+		$first = 5 * ($page - 1) + 1;
+		$last = 5;
+
 		$publishes = array();
 		if (!isset($_SESSION))
 			session_start();
-		$res = $this->perfom_query("SELECT * FROM publishes ORDER BY id DESC", array());
+		$res = $this->perfom_query("SELECT * FROM publishes ORDER BY id DESC LIMIT ?, ?", array($first, $last));
 		$fetch = $res->fetchall();
+		if (count($fetch) === 0)
+		return false;
 		foreach ($fetch as $publ)
 		{
 			$publishes[] = $this->get_publish($publ);
@@ -146,8 +151,27 @@ class model_feeds extends model
 			//$rez = perfom_query($pdo, "SELECT MAX(id) FROM publishes", array());
 			$publ_id = $_POST['publish_id'];
 			$rez = $this->perfom_query("SELECT * FROM publishes WHERE id=?", array($publ_id));
+			
+
+			$stmt = $this->perfom_query("SELECT * FROM publishes WHERE id=?", array($_POST['publish_id']));
+			$user_id = $stmt->fetchall()[0]['user_id'];
+
+			$stmt = $this->perfom_query("SELECT * FROM users WHERE id=?", array($user_id));
+			$fetch = $stmt->fetchall();
+			$mail = $fetch[0]['email'];
+			$user = $fetch[0]['name'];
+
+			$subject = "New comment";
+			$main = "Dear $user! You have got new comment on PicChat";
+			$main = wordwrap($main, 65, "\r\n");
+			$headers = 'From: picchat.manager@gmail.com'."\r\n".
+				"Reply-To: picchat.manager@gmail.com"."\r\n".
+				"X-Mailer: PHP/".phpversion();
+			mail($mail, $subject, $main, $headers);
+
 			return $this->get_publish($rez->fetch());
 		}
+
 		return false;
 	}
 

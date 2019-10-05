@@ -1,5 +1,5 @@
 
-<script src="confirm.js"></script>
+<script src="/js/confirm.js"></script>
 	<div class="border">
 		<div class="form">
 			<div class="title">

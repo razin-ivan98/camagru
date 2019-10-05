@@ -7,50 +7,32 @@ class controller_reset_password extends controller
 		$this->model = new model_reset_password();
 		$this->view = new view();
 	}
-	
-	function generate_random($length = 10)
-	{
-		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		$charactersLength = strlen($characters);
-		$randomString = '';
-		for ($i = 0; $i < $length; $i++) {
-			$randomString .= $characters[rand(0, $charactersLength - 1)];
-		}
-		return $randomString;
-	}
 
-	function action_reset_password()
+	function action_new_password()
 	{
 		if (!isset($_SESSION))
 			session_start();
-		if (isset($_POST['email']) AND $_POST['email'] != '')
+		if (isset($_POST['password']) && isset($_POST['confirm_password']) &&
+			$_POST['confirm_password'] === $_POST['password'] && $_POST['confirm_password'] !== '' &&
+			isset($_POST['link']) && $_POST['link'] !== '')
 		{
-            $email = $this->model->get_email();
+			$id = $this->model->get_user_from_link($_POST['link']);
+			if ($id === false)
+				$res = false;
+			else
+			{
+				$this->model->change_password($_POST['password'], $id);
+				$res = true;
+				$this->model->delete_link($_POST['link']);
+			}
 
-
-			$subject = "Confirm your account";
-			$main = "Dear $user! Click to this link to confirm your account: http://".$_SERVER['SERVER_NAME'].":8080/link/$link";
-			$main = wordwrap($main, 65, "\r\n");
-			$headers = 'From: picchat.manager@gmail.com'."\r\n".
-				"Reply-To: picchat.manager@gmail.com"."\r\n".
-				"X-Mailer: PHP/".phpversion();
-			$res = mail($email, $subject, $main, $headers);
-			$res = array('answer' => $res);
-			
-			$this->view->response_ajax(array('answer' => $res , 'text' => "error"));
+			$this->view->response_ajax(array('answer' => $res));
 		}
 		else
 		{
 			$this->view->response_ajax(array('answer' => false, 'text' => "error"));
 		}
 	}
-
-
-	function action_index()
-	{
-		$this->view->generate('view_reset_password.php', 'view_template_login.php');
-	}
-
 
 }
 ?>

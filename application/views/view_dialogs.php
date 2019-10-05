@@ -1,5 +1,5 @@
-<script src="dialogs.js"></script>
-<link rel="stylesheet" href="dialogs.css">
+<script src="/js/dialogs.js"></script>
+<link rel="stylesheet" href="/css/dialogs.css">
 <div class="container">
 	<div class="sidebar_left">
 		<a href="/feeds"><div class="bar_element" id="first_element">Feeds</div></a>
@@ -19,10 +19,10 @@
 			foreach ($dialogs as $dialog)
 			{
 				print '<div class="dialog" id="'.$dialog['id'].'" onclick="open_dialog(this);">';
-				print '<div class="avatar"><img src="avatars/'.$dialog['avatar'].'"></div>';
-				print '<div class="author"><h3>'.$dialog['user'].'</h3></div>';
+				print '<div class="avatar"><img src="/avatars/'.htmlentities($dialog['avatar']).'"></div>';
+				print '<div class="author"><h3>'.htmlentities($dialog['user']).'</h3></div>';
 				if ($dialog['unread'] !== 0)
-					print '<div class="unread">'.$dialog['unread'].'</div>';
+					print '<div class="unread">'.htmlentities($dialog['unread']).'</div>';
 				print '</div>';
 			}		
 			print'</div></div>';

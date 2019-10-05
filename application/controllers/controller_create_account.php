@@ -7,7 +7,7 @@ class controller_create_account extends controller
 		$this->model = new model_create_account();
 		$this->view = new view();
 	}
-	function action_index()
+	function action_index($params)
 	{	
 		$this->view->generate('view_create_account.php', 'view_template_login.php');
 	}

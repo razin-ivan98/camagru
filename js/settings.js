@@ -29,7 +29,7 @@ window.onload = function () {
     var link = document.createElement("link");
     link.setAttribute("rel", "stylesheet");
     link.setAttribute("type", "text/css");
-    link.setAttribute("href", 'mobile.css');
+    link.setAttribute("href", '/css/mobile.css');
     document.getElementsByTagName("head")[0].appendChild(link);
   }
 }
@@ -39,16 +39,15 @@ window.onload = function () {
 function new_avatar() {
   var forme = document.querySelector("#change_avatar");
   var request = new XMLHttpRequest();
-  request.open("POST", "settings/new_avatar/", true);
+  request.open("POST", "/settings/new_avatar/", true);
 
   var formData = new FormData(forme);
   is_in_request = 1;
   request.send(formData);
 
-  // Функция для наблюдения изменения состояния request.readyState обновления statusMessage соответственно
   request.onreadystatechange = function () {
     if (request.readyState == 4 && request.status == 200) {
-      //alert(request.responseText);
+
       var answer = JSON.parse(request.responseText);
       if (answer.answer === true) alert("Success");
       else alert("Error");
@@ -68,13 +67,12 @@ function set_int_check() {
     var a = document.querySelector("#dialogs_link");
 
     var request = new XMLHttpRequest();
-    request.open('POST', 'feeds/check_dialogs_activity', true);
+    request.open('POST', '/feeds/check_dialogs_activity', true);
     is_in_request = 1;
     var formData = new FormData();
     request.send(formData);
 
-    // Функция для наблюдения изменения состояния request.readyState обновления statusMessage соответственно
-    request.onreadystatechange = function () {
+   request.onreadystatechange = function () {
       if (request.readyState == 4 && request.status == 200) {
         var res = JSON.parse(request.responseText);
         if (res.answer === true) {
@@ -101,8 +99,7 @@ function set_int_check() {
 function change_password() {
   var forme = document.querySelector("#change_password");
   var request = new XMLHttpRequest();
-  request.open("POST", "settings/change_password/", true);
-  // alert('k');
+  request.open("POST", "/settings/change_password/", true);
   var formData = new FormData(forme);
 
   if (formData.get("old_pass") === "" || formData.get("new_pass") === "" || formData.get("r_new_pass") === "") {
@@ -116,10 +113,9 @@ function change_password() {
   is_in_request = 1;
   request.send(formData);
 
-  // Функция для наблюдения изменения состояния request.readyState обновления statusMessage соответственно
-  request.onreadystatechange = function () {
+ request.onreadystatechange = function () {
     if (request.readyState == 4 && request.status == 200) {
-      // alert(request.responseText);
+
       var answer = JSON.parse(request.responseText);
       if (answer.answer === true) alert("Success");
       else alert(answer.text);

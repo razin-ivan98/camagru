@@ -8,7 +8,7 @@ class controller_login extends controller
 		$this->view = new view();
 	}
 
-	function action_index()
+	function action_index($params)
 	{	
 		$this->view->generate('view_login.php', 'view_template_login.php');
 	}

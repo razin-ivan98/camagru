@@ -1,4 +1,4 @@
-<script src="login.js"></script>
+<script src="/js/login.js"></script>
 	<div class="border">
 		<div class="form">
 			<div class="title">

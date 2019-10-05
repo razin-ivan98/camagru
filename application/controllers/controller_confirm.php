@@ -73,7 +73,7 @@ class controller_confirm extends controller
 	}
 
 
-	function action_index()
+	function action_index($params)
 	{
 		if ($this->model->is_logged() == true)
 		{

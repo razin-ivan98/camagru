@@ -3,13 +3,13 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>PicChat</title>
-		<link rel="stylesheet" href="login.css">
+		<link rel="stylesheet" href="/css/login.css">
 	</head>
 	<body>
 		<div class="header">
 		<div class="logo"> 
 			<a href="/feeds">
-				<img class="logo-image", src="logolong.png">
+				<img class="logo-image", src="/pics/logolong.png">
 			</a>
 		</div>
 		</div>

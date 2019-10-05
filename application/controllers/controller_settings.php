@@ -8,7 +8,7 @@ class controller_settings extends controller
 		$this->view = new view();
 	}
 	
-	function action_index()
+	function action_index($params)
 	{
 		if ($this->model->is_logged() == true)
 		{
@@ -31,8 +31,18 @@ class controller_settings extends controller
 
 	function action_new_avatar()
 	{
-		if (($_FILES['file_av']['error']) == 0)
-		{
+		
+		if (isset($_FILES['file_av']) && ($_FILES['file_av']['error']) == 0)
+		{	
+			$mime = mime_content_type($_FILES['file_av']['tmp_name']);
+			if ($mime !== 'image/gif' && $mime !== 'image/jpeg' && $mime !== 'image/png'
+			&& $mime !== 'image/pjpeg') 
+			{
+				$this->view->response_ajax(array('answer' => false));
+				exit;
+			}
+
+
 			$this->model->new_avatar();
 			$this->view->response_ajax(array('answer' => true));
 		}

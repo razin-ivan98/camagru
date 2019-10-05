@@ -7,7 +7,7 @@ class controller_db_error extends controller
 		$this->view = new view();
 	}
 
-	function action_index()
+	function action_index($params)
 	{
 		$this->view->generate('view_db_error.php', 'view_template_login.php');
 	}

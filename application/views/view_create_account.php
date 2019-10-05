@@ -1,4 +1,4 @@
-	<script src="create_account.js"></script>
+	<script src="/js/create_account.js"></script>
 	<div class="border">
 		<div class="form">
 			<div class="title">

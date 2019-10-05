@@ -8,7 +8,7 @@ class controller_dialogs extends controller
 		$this->view = new view();
 	}
 	
-	function action_index()
+	function action_index($params)
 	{
 		if ($this->model->is_logged() == true)
 		{
@@ -66,14 +66,14 @@ class controller_dialogs extends controller
 		}
 		$answer['answer'] = true;
 		$opp_id = $this->model->get_opp_user_id($_GET['dialog_id']);
-		$answer['user'] = $this->model->get_user($opp_id);
+		$answer['user'] = htmlentities($this->model->get_user($opp_id));
 		$answer['avatar'] = $this->model->get_avatar($opp_id);
 		$messages = array();
 		foreach($res as $message)
 		{
 			$is_my = ($message['user_id'] === $_SESSION['uid'] ? true : false);
 			$messages[] = array('is_my' => $is_my,
-								'text' => $message['message'],
+								'text' => htmlentities($message['message']),
 								'date' => $message['date'],
 								'id' => $message['id'],
 								'is_read' => $message['is_read']
@@ -103,7 +103,7 @@ class controller_dialogs extends controller
 			{
 				$is_my = ($message['user_id'] === $_SESSION['uid'] ? true : false);
 				$messages[] = array('date' => $message['date'],
-									'text' => $message['message'],
+									'text' => htmlentities($message['message']),
 									'is_my' => $is_my,
 									'id' => $message['id']
 									);

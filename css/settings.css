@@ -1,0 +1,63 @@
+.str
+{
+    width: 580px;
+    height: 30px;
+    color: #ff6c6c;
+    font-family: Linden Hill;
+    font-size: 18px;
+}
+.pass_input
+{
+    float: right;
+    width: 300px;
+
+
+
+	border: 1px solid #ff6c6c;
+	border-radius: 3px;
+	font-size: 18px;
+	background: #ffdada !important; 
+	outline: none; 
+	color: #ff6c6c;
+	font-family: Linden Hill;
+}
+.pass_submit
+{
+    
+
+	border: none;
+	color: #ffdada;
+	background:  #ff6c6c;
+	border-radius: 3px;
+	width: 100px;
+	height: 27px;
+    font-size: 18px;
+    margin-left: 240px;
+}
+
+h3{
+    color: #ff6c6c;
+    text-align: center;
+}
+
+#av
+{
+    display: none;
+    overflow:hidden;
+}
+
+label
+{
+    color:#ff6c6c;
+    padding:0;
+    line-height:40px;
+    width:300px;
+    margin:auto;
+    display:block;
+    border-radius: 3px;
+    margin-bottom: 10px;;
+    border:2px solid #ff6c6c;
+    text-align: center;
+    font-family: Linden Hill;
+    font-size: 18px;
+}

@@ -23,11 +23,8 @@ function create_account()
 		return;
 	}
 	var request = new XMLHttpRequest();
-    request.open('POST', 'create_account/create_account', true);
+    request.open('POST', '/create_account/create_account', true);
 	request.send(formData);
-	
-	
-    // Функция для наблюдения изменения состояния request.readyState обновления statusMessage соответственно
 	request.onreadystatechange = function(){ 
 		if (request.readyState == 4 && request.status == 200){
 			var res = JSON.parse(request.responseText);

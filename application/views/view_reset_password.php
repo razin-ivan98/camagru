@@ -1,15 +1,14 @@
-<script src="login.js"></script>
+<script src="/js/reset_password.js"></script>
 	<div class="border">
 		<div class="form">
 			<div class="title">
-				<h2>ВОССТАНОВЛЕНИЕ ПАРОЛЯ</h2>
+				<h2>ВОССТАНОВИТЬ ПАРОЛЬ</h2>
 			</div>
-				
-				<form id="login_form">
-                    <input type="hidden" name="link" value="<?php if (isset($link)) echo $link; ?>">
+				<form id="reset_form">
+                    <input type="hidden" name="link" value="<?php if (isset($data)) echo $data; ?>">
 					<div class="str"><text>ПАРОЛЬ</text><input type="password" name="password"/></div>
-					<div class="str"><text>ПОВТОРИТЕ</text><input type="password" name="confirm_passord"/></div>
-					<div class="str"><button class="button" type="button" onclick="reset();">ИЗМЕНИТЬ</button></div>
+					<div class="str"><text>ПОВТОРИТЕ</text><input type="password" name="confirm_password"/></div>
+					<div class="str"><button class="button" type="button" onclick="reset_pass();">ИЗМЕНИТЬ</button></div>
 				</form>
 
 				<div class="str"><a href="/login">войти</a></div>
