@@ -7,25 +7,26 @@ class model
 	function __construct()
 	{
 		$host = '172.17.0.3';
-	   // $host = 'localhost';
-		//$db   = 'id10411394_base';
-        $db   = 'base';
-		//$user = 'id10411394_root';
-		$user = 'root';
-		//$pass = '1998VONdarm';
-		$pass = 'root';
-		//$pass ='';
-		$charset = 'utf8';
-		//session_start();
-		//if (isset($_SESSION))
-		//var_dump( $_SESSION);
-		$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-		$opt = [
-			PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-			PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-			PDO::ATTR_EMULATE_PREPARES   => false,
-		];
-		$this->pdo = new PDO($dsn, $user, $pass, $opt);
+		// $host = 'localhost';
+		 //$db   = 'id10411394_base';
+		 $db   = 'base';
+		 //$user = 'id10411394_root';
+		 $db_user = 'root';
+		 //$pass = '1998VONdarm';
+		 $db_pass = 'root';
+		 //$pass ='';
+		 $charset = 'utf8';
+		 //session_start();
+		 //if (isset($_SESSION))
+		 //var_dump( $_SESSION);
+		 $dsn = "mysql:host=$host;charset=$charset";
+		 $opt = [
+			 PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+			 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+			 PDO::ATTR_EMULATE_PREPARES   => false,
+		 ];
+		$this->pdo = new PDO($dsn, $db_user, $db_pass, $opt);
+		$this->pdo->exec("USE $db");
 	}
 	
 	public function logout()
@@ -35,12 +36,8 @@ class model
 		
 		if (isset($_SESSION['uid']))
 			unset($_SESSION['uid']);
-		SetCookie('login', null, -1, "/"); //удаляем cookie с логином 	
-		/*if (isset($_COOKIE['login']))
-			unset($_COOKIE['login']);
-		if (isset($_COOKIE['password']))
-			unset($_COOKIE['password']);*/
-		SetCookie('password', null, -1, "/"); //удаляем cookie с паролем  
+		SetCookie('login', null, -1, "/");
+		SetCookie('password', null, -1, "/");
 	}
 	
 	public function is_logged()

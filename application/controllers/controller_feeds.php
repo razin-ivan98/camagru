@@ -22,7 +22,7 @@ class controller_feeds extends controller
 			$data = array();		
 			$data['my_name'] = $this->model->get_logged_user();
 			$data['publishes'] = $this->model->get_publishes($params);
-			if ($data['publishes'] === false)
+			if ($data['publishes'] === false && $params != 1)
 				header('Location: /feeds/index/1');
 			$data['my_avatar'] = $this->model->get_my_avatar();
 			$data['count_of_dialogs_events'] = $this->model->get_count_of_dialogs_events();

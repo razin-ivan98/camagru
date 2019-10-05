@@ -75,11 +75,11 @@
 			print'</div>';
 			print'</div>';
 
-			
-		foreach ($publishes as $publish)
-		{
-			$this->draw_publish($publish);
-		}
+		if (is_array($publishes))	
+			foreach ($publishes as $publish)
+			{
+				$this->draw_publish($publish);
+			}
 
 		?>	
 	</div>

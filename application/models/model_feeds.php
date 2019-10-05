@@ -4,7 +4,7 @@ class model_feeds extends model
 {
 	public function get_publishes($page)
 	{
-		$first = 5 * ($page - 1) + 1;
+		$first = 5 * ($page - 1);
 		$last = 5;
 
 		$publishes = array();
@@ -13,7 +13,7 @@ class model_feeds extends model
 		$res = $this->perfom_query("SELECT * FROM publishes ORDER BY id DESC LIMIT ?, ?", array($first, $last));
 		$fetch = $res->fetchall();
 		if (count($fetch) === 0)
-		return false;
+			return false;
 		foreach ($fetch as $publ)
 		{
 			$publishes[] = $this->get_publish($publ);
